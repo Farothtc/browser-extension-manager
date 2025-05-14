@@ -14,12 +14,8 @@ export default function Nav() {
           alt="Logo"
           width={200}
           height={100}
-          className="rounded-3xl text-white"
         ></Image>
-        <button
-          className="btn btn-ghost rounded-xl w-[50px] h-[50px] p-0"
-          style={{ backgroundColor: "#2f354d" }}
-        >
+        <button className="btn btn-ghost rounded-xl w-[50px] h-[50px] p-0 bg-[#2f354d]">
           <Image
             src="/images/icon-sun.svg"
             alt="Sun"
