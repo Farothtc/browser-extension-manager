@@ -18,4 +18,4 @@ This is a project that aims to reflect a Browser Extension Manager.
 - Conditional Rendering,
 - dark: method for instant theme change.
 
-Check it out on [here](https://mvkirimi.com) !
+Check it out on [here](https://browser-extension-manager-five.vercel.app) !
