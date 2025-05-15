@@ -7,7 +7,21 @@ import Extensions from "./Components/Extensions";
 import { Extension } from "./types";
 
 export default function Home() {
+  const [extensions, setExtensions] = useState<Extension[]>(extensionsData);
   const [filter, setFilter] = useState("all");
+
+  const handleToggle = (name: string) => {
+    setExtensions((prev) =>
+      prev.map((ext) =>
+        ext.name === name ? { ...ext, isActive: !ext.isActive } : ext
+      )
+    );
+  };
+
+  const handleRemove = (name: string) => {
+    setExtensions((prev) => prev.filter((ext) => ext.name !== name));
+  };
+
   const style = {
     backgroundImage: "linear-gradient(#04091c,#0a1542)",
     backgroundSize: "cover",
@@ -18,11 +32,13 @@ export default function Home() {
   const filteredBtn = "bg-[#f35c55] text-black";
   const unfilteredBtn = "bg-[#2f354d]";
 
-  const element = extensionsData.map((e: Extension, index: number) => (
-    <Extensions e={e} key={index} />
-  ));
+  const filteredExtensions = extensions.filter((e: Extension) => {
+    if (filter === "all") return true;
+    if (filter === "active") return e.isActive;
+    if (filter === "inactive") return !e.isActive;
+    return true;
+  });
 
-  console.log(extensionsData);
   return (
     <main className="min-h-screen" style={style}>
       <section className="container mx-auto pt-6">
@@ -56,7 +72,16 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <div>{element}</div>
+        <div className="grid grid-cols-3 grid-rows-4 gap-5 py-10">
+          {filteredExtensions.map((e: Extension) => (
+            <Extensions
+              e={e}
+              key={e.name}
+              onToggle={() => handleToggle(e.name)}
+              handleRemove={() => handleRemove(e.name)}
+            />
+          ))}
+        </div>
       </section>
     </main>
   );
